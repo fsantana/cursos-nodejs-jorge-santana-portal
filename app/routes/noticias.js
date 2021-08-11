@@ -2,23 +2,13 @@ module.exports = function(application){
 
   application.get('/noticias', function(req,res){
 
-      var connection = application.config.dbConnection();
-      var noticiasModel = new application.app.models.NoticiasDAO(connection);
-
-      noticiasModel.getNoticias(function(error, result){
-          res.render('noticias/noticias', { noticias : result });
-      });
+      application.app.controllers.noticias.noticias(application, req, res);
 
   });
 
   application.get('/noticia', function(req,res){
 
-    var connection = application.config.dbConnection();
-    var noticiasModel = new application.app.models.NoticiasDAO(connection);
+      application.app.controllers.noticias.noticia(application, req, res);
 
-    noticiasModel.getNoticia(function(error, result){
-        res.render('noticias/noticia', { noticia : result[0] });
-    });
-
-});
+  });
 }
