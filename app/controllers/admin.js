@@ -1,8 +1,8 @@
-module.exports.formulario_inclusao_noticia = function (application, req, res) {
+module.exports.formulario_inclusao_noticia = (application, req, res) => {
   res.render('admin/form_add_noticia', { validacao : {}, noticia : {} });
 }
 
-module.exports.noticias_salvar = function (application, req, res) {
+module.exports.noticias_salvar = (application, req, res) => {
   var noticia = req.body;
 
   req.assert('titulo', 'Título é obrigatório').notEmpty();
@@ -23,7 +23,7 @@ module.exports.noticias_salvar = function (application, req, res) {
   var connection = application.config.dbConnection();
   var noticiasModel = new application.app.models.NoticiasDAO(connection);
 
-  noticiasModel.salvarNoticia(noticia, function(error, result){
+  noticiasModel.storeNoticia(noticia, (error, result) => {
       res.redirect('/noticias');
   });
 }
